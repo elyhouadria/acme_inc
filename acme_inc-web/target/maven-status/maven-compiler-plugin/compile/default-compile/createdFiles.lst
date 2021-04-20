@@ -1,0 +1,11 @@
+com\ely\managedbeans\ReviewBean.class
+com\ely\managedbeans\UserBean.class
+com\ely\managedbeans\CategoryBean.class
+com\ely\managedbeans\ProductBean.class
+com\ely\managedbeans\DataBean.class
+com\ely\managedbeans\UserOrderBean.class
+com\ely\managedbeans\AdressBean.class
+com\ely\managedbeans\PayementBean.class
+com\ely\managedbeans\LoginBean.class
+com\ely\managedbeans\OrderLineBean.class
+com\ely\managedbeans\ShippingBean.class

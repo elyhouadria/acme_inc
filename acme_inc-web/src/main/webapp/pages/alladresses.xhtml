@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0
+Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+	<ui:param name="page_name" value="Manage Adresses" />
+	<ui:define name="content">
+
+		<h:panelGroup columns="2">
+			<h:form>
+				<h:dataTable value="#{adressBean.getAllAdresses}" var="adress"
+					border="1">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Adress" />
+						</f:facet>
+						<h:outputText
+							value="#{adress.firstName} #{adress.lastName} #{adress.adressLine1} #{adress.adressLine2} #{adress.zipCode} #{adress.city} #{adress.country}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+
+		<h:panelGroup columns="2">
+			<h:form method="post">
+				<table>
+					<tr>
+						<td><h:outputText value="First Name"></h:outputText></td>
+						<td><h:inputText value="#{adressBean.firstName}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Last Name"></h:outputText></td>
+						<td><h:inputText value="#{adressBean.lastName}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Adress Line 1"></h:outputText></td>
+						<td><h:inputText value="#{adressBean.adressLine1}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Adress Line 2"></h:outputText></td>
+						<td><h:inputText value="#{adressBean.adressLine2}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="zip code"></h:outputText></td>
+						<td><h:inputText value="#{adressBean.zipCode}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="City"></h:outputText></td>
+						<td><h:inputText value="#{adressBean.city}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Country"></h:outputText></td>
+						<td><h:inputText value="#{adressBean.country}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="User"></h:outputText> <h:selectOneMenu
+								value="#{adressBean.selectedUserId}">
+								<f:selectItem itemLabel="Select User" itemValue="" />
+								<f:selectItems value="#{userBean.getAllUsers}" var="user"
+									itemValue="#{user.id}" itemLabel="#{user}" />
+							</h:selectOneMenu></td>
+					</tr>
+
+					<!-- onclick busts the whole page??? -->
+					<tr>
+						<h:commandButton action="#{adressBean.addAdress()}"
+							value="Create Adress" />
+					</tr>
+				</table>
+			</h:form>
+		</h:panelGroup>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,23 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:panelGroup>
+
+		<b>ACME_inc</b>
+		<br />
+		<h:outputFormat>
+			<f:param value="#{loginBean.email}" />
+		</h:outputFormat>
+		<h:outputText
+			value="hello #{loginBean.user.firstName} #{loginBean.user.lastName}" />
+		<br />
+		<h:form>
+		<h:commandLink value="Logout" action="#{loginBean.doLogout()}" />
+		</h:form>
+
+
+	</h:panelGroup>
+
+
+</ui:composition>
