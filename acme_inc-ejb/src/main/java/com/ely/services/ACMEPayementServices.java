@@ -29,8 +29,8 @@ public class ACMEPayementServices implements ACMEPayementServicesRemote {
 	}
 	
 	@Override
-	public void UpdatePayement(OrderLine orderline) {
-		em.merge(orderline);
+	public void UpdatePayement(Payement payement) {
+		em.merge(payement);
 	}
 	
 	

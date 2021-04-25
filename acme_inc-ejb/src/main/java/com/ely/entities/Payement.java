@@ -38,6 +38,22 @@ public class Payement implements Serializable {
 
 	public Payement() {}
 
+	public Payement(Double amount, PayementStatus payementStatus, PayementType payementType, String currency, UserOrder userOrder) {
+		this.amount = amount;
+		this.payementStatus = payementStatus;
+		this.payementType = payementType;
+		this.currency = currency;
+		this.userorder = userOrder;
+	}
+	public Payement(int id, Double amount, PayementStatus payementStatus, PayementType payementType, String currency, UserOrder userOrder) {
+		this.id = id;
+		this.amount = amount;
+		this.payementStatus = payementStatus;
+		this.payementType = payementType;
+		this.currency = currency;
+		this.userorder = userOrder;
+	}
+
 	public int getId() {
 		return id;
 	}

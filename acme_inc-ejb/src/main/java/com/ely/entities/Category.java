@@ -58,9 +58,25 @@ public class Category implements Serializable {
 		this.productsInCategory = productsInCategory;
 	}
 
-	public Category(String name, String description) {
+	public Category(int id, String name, String description) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
-	}	
+
+	}
+
+	public Category(String name, String description) {
+		super();
+		this.name = name;
+		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return id + " " + name + ": " + description;
+	}
+	
+	
 	
 }

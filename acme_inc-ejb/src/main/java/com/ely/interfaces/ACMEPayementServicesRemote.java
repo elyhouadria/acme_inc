@@ -13,6 +13,6 @@ public interface ACMEPayementServicesRemote {
 
 	void DeletePayement(int payementId);
 
-	void UpdatePayement(OrderLine orderline);
+	void UpdatePayement(Payement payement);
 
 }

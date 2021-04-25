@@ -17,13 +17,24 @@ public class Shipping implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	
+	private String shippingName;
 	private Double shippingPrice;
 	
 	@OneToOne(mappedBy="shipping")
 	private UserOrder userorder;
 
 	public Shipping() {}
+
+	public Shipping(String shippingName, Double shippingPrice) {
+		this.shippingName = shippingName;
+		this.shippingPrice = shippingPrice;
+	}
+	
+	public Shipping(int id, String shippingName, Double shippingPrice) {
+		this.id = id;
+		this.shippingName = shippingName;
+		this.shippingPrice = shippingPrice;
+	}
 
 	public int getId() {
 		return id;
@@ -48,6 +59,23 @@ public class Shipping implements Serializable{
 	public void setUserOrder(UserOrder userorder) {
 		this.userorder = userorder;
 	}
+
+	public String getShippingName() {
+		return shippingName;
+	}
+
+	public void setShippingName(String shippingName) {
+		this.shippingName = shippingName;
+	}
+
+	public UserOrder getUserorder() {
+		return userorder;
+	}
+
+	public void setUserorder(UserOrder userorder) {
+		this.userorder = userorder;
+	}
 	
 	
+		
 }

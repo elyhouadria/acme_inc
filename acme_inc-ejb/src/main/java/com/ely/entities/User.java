@@ -51,7 +51,7 @@ public class User implements Serializable{
 
 	public User() {}
 
-	public User(String firstName, String lastName, String email, String password, Date creationDate, Boolean isActive) {
+	public User(String firstName, String lastName, String email, String password, Date creationDate, Boolean isActive, UserRole userRole) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -59,12 +59,25 @@ public class User implements Serializable{
 		this.password = password;
 		this.creationDate = creationDate;
 		this.isActive = isActive;
+		this.userRole = userRole;
 	}
 
 	public User(String firstName, String lastName) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+	}
+
+	public User(int id, String firstName, String lastName, String email, String password, Date creationDate, Boolean isActive, UserRole userRole) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.creationDate = creationDate;
+		this.isActive = isActive;
+		this.userRole = userRole;
 	}
 
 	public int getId() {

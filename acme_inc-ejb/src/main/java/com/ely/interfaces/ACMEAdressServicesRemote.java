@@ -10,9 +10,9 @@ import com.ely.entities.Adress;
 
 public interface ACMEAdressServicesRemote {
 
-	int AddAdress(Adress adress);
+	int addAdress(Adress adress);
 
-	void DeleteAdress(int adressId);
+	void deleteAdress(int adressId);
 
 	void updateAdress(Adress adress);
 

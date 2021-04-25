@@ -18,13 +18,13 @@ public class ACMEAdressServices implements ACMEAdressServicesRemote {
 
 	
 	@Override
-	public int AddAdress(Adress adress) {
+	public int addAdress(Adress adress) {
 		em.persist(adress);
 		return adress.getId();
 	}
 	
 	@Override
-	public void DeleteAdress(int adressId) {
+	public void deleteAdress(int adressId) {
 		em.remove(em.find(Adress.class, adressId));
 	}
 	

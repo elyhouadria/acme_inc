@@ -5,8 +5,9 @@ import java.util.List;
 
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
+
 
 import com.ely.entities.Category;
 import com.ely.entities.Product;
@@ -20,33 +21,35 @@ public class CategoryBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private int id;
 	private String name;
 	private String description;
+	private int selectedCategoryId;
 	
 	private List<Category> getAllCategories;
-	
-	
 	private List<Product> productsInCategory;
 	
 	@EJB
 	ACMECategoryServices acmecategoryservices;
 	
-	public void modify(Category category) {
+	public void modifyCategory(Category category) {
+		this.setSelectedCategoryId(category.getId());
 		this.setName(category.getName());
 		this.setDescription(category.getDescription());
 	}
+	
 	public void addCategory() {
-		acmecategoryservices.AddCategory(new Category(name, description));		
+		acmecategoryservices.addCategory(new Category(name, description));		
 	}
+	public void removeCategory(int categoryId) {
+		acmecategoryservices.deleteCategory(categoryId);
+	}
+	
+	public void updateCategory() {
+		acmecategoryservices.updateCategory(new Category(selectedCategoryId, name, description));
+	}
+	
 	public String getName() {
 		return name;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public void setName(String name) {
 		this.name = name;
@@ -61,7 +64,7 @@ public class CategoryBean implements Serializable{
 		getAllCategories = acmecategoryservices.getAllCategories();
 		return getAllCategories;
 	}
-	public void setGetAllCategories(List<Category> getAllCategories) {
+	public void setAllCategories(List<Category> getAllCategories) {
 		this.getAllCategories = getAllCategories;
 	}
 	public List<Product> getProductsInCategory() {
@@ -70,4 +73,11 @@ public class CategoryBean implements Serializable{
 	public void setProductsInCategory(List<Product> productsInCategory) {
 		this.productsInCategory = productsInCategory;
 	}
+	public int getSelectedCategoryId() {
+		return selectedCategoryId;
+	}
+	public void setSelectedCategoryId(int selectedCategoryId) {
+		this.selectedCategoryId = selectedCategoryId;
+	}
+	
 }

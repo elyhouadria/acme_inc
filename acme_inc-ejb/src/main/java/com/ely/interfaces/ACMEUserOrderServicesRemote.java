@@ -4,18 +4,21 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.ely.entities.OrderLine;
 import com.ely.entities.UserOrder;
 
 @Remote
 
 public interface ACMEUserOrderServicesRemote {
 
-	int AddUserOrder(UserOrder userOrder);
+	int addUserOrder(UserOrder userOrder);
 
 	List<UserOrder> getAllUserOrders();
 
-	void DeleteUserOrder(int userOrderId);
+	void deleteUserOrder(int userOrderId);
 
-	void UpdateUserOrder(UserOrder userorder);
+	void updateUserOrder(UserOrder userorder);
+	
+	public List<OrderLine> getUserOrderOrderlines(int userOrderId);
 
 }

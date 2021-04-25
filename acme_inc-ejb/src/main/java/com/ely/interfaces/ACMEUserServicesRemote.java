@@ -11,11 +11,11 @@ import com.ely.entities.User;
 
 public interface ACMEUserServicesRemote {
 
-	int AddUser(User user);
-	void DeleteUser(int userId);
+	int addUser(User user);
+	void deleteUser(int userId);
 	List<User> searchUsersByName(String searchString);
-	User Authentication(String email, String password);
-	void UpdateUser(User user);
+	User userAuthentication(String email, String password);
+	void updateUser(User user);
 	User getUserByEmailAndPassword(String email, String password);
 	public List<User> getAllUsers();
 }

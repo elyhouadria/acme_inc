@@ -11,9 +11,9 @@ import com.ely.entities.Product;
 
 public interface ACMECategoryServicesRemote {
 
-	int AddCategory(Category category);
+	int addCategory(Category category);
 
-	void DeleteCatgeory(int categoryId);
+	void deleteCategory(int categoryId);
 
 	void updateCategory(Category category);
 	

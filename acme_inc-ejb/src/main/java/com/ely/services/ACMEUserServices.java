@@ -56,18 +56,18 @@ public class ACMEUserServices implements ACMEUserServicesRemote {
 	}
 
 	@Override
-	public int AddUser(User user) {
+	public int addUser(User user) {
 		em.persist(user);
 		return user.getId();
 	}
 	
 	@Override
-	public void DeleteUser(int userId) {
+	public void deleteUser(int userId) {
 		em.remove(em.find(User.class, userId));
 	}
 	
 	@Override
-	public void UpdateUser(User user) {
+	public void updateUser(User user) {
 		em.merge(user);
 	}
 		
@@ -79,7 +79,7 @@ public class ACMEUserServices implements ACMEUserServicesRemote {
 	}
 	
 	@Override
-	public User Authentication(String email, String password) {
+	public User userAuthentication(String email, String password) {
 		TypedQuery<User> query = em.createQuery("select e from user where e.email=:email and e.password=:password", User.class);
 		query.setParameter("email", email);
 		query.setParameter("password", password);

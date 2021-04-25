@@ -21,6 +21,7 @@ public class AdressBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int selectedUserId;
+	private int selectedAdressId;
 	private String lastName;
 	private String firstName;
 	private String adressLine1;
@@ -42,10 +43,11 @@ public class AdressBean implements Serializable {
 		User selectedUser = new User();
 		selectedUser.setId(selectedUserId);
 		adress.setUser(selectedUser);
-		acmeadressservices.AddAdress(adress);
+		acmeadressservices.addAdress(adress);
 	}
 	
-	public void modify(Adress adress) {
+	public void modifyAdress(Adress adress) {
+		this.setSelectedAdressId(adress.getId());
 		this.setLastName(adress.getLastName());
 		this.setFirstName(adress.getFirstName());
 		this.setAdressLine1(adress.getAdressLine1());
@@ -53,14 +55,15 @@ public class AdressBean implements Serializable {
 		this.setZipCode(adress.getZipCode());
 		this.setCity(adress.getCity());
 		this.setCountry(adress.getCountry());
+		this.setUser(adress.getUser());
 	}
 	
 	public void removeAdress(int adressId) {
-		acmeadressservices.DeleteAdress(adressId);
+		acmeadressservices.deleteAdress(adressId);
 	}
 	
 	public void updateAdress() {
-		acmeadressservices.updateAdress(new Adress(lastName, firstName,adressLine1, adressLine2, zipCode, city, country));
+		acmeadressservices.updateAdress(new Adress(selectedAdressId, lastName, firstName, adressLine1, adressLine2, zipCode, city, country, user));
 	}
 
 	public String getLastName() {
@@ -151,4 +154,13 @@ public class AdressBean implements Serializable {
 	public void setSelectedUserId(int selectedUserId) {
 		this.selectedUserId = selectedUserId;
 	}
+
+	public int getSelectedAdressId() {
+		return selectedAdressId;
+	}
+
+	public void setSelectedAdressId(int selectedAdressId) {
+		this.selectedAdressId = selectedAdressId;
+	}
+	
 }

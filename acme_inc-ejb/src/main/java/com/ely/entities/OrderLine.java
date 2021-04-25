@@ -39,6 +39,21 @@ public class OrderLine implements Serializable {
 
 	public OrderLine() {}
 
+	public OrderLine(Date orderLineDate, Double itemPrice, Product product, UserOrder userOrder) {
+		this.orderLineDate = orderLineDate;
+		this.itemPrice = itemPrice;
+		this.product = product;
+		this.userorder = userOrder;
+	}
+
+	public OrderLine(int id, Date orderLineDate, Double itemPrice, Product product, UserOrder userOrder) {
+		this.id = id;
+		this.orderLineDate = orderLineDate;
+		this.itemPrice = itemPrice;
+		this.product = product;
+		this.userorder = userOrder;
+	}
+
 	public int getId() {
 		return id;
 	}

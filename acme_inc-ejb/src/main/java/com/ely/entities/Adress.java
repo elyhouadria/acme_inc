@@ -128,8 +128,7 @@ public class Adress implements Serializable {
 		this.country = country;
 	}
 
-	public Adress(String lastName, String firstName, String adressLine1, String adressLine2, int zipCode, String city,
-			String country, User user) {
+	public Adress(String lastName, String firstName, String adressLine1, String adressLine2, int zipCode, String city, String country, User user) {
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.adressLine1 = adressLine1;
@@ -138,8 +137,18 @@ public class Adress implements Serializable {
 		this.city = city;
 		this.country = country;
 		this.user = user;
+		}
+
+	public Adress(int id, String lastName, String firstName, String adressLine1, String adressLine2, int zipCode, String city, String country, User user) {
+		this.id = id;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.adressLine1 = adressLine1;
+		this.adressLine2 = adressLine2;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.country = country;
+		this.user = user;
+		
 	}
-	
-	
-	
 }

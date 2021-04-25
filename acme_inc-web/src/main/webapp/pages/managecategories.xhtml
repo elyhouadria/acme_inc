@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0
+Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+
+	<ui:define name="content">
+		<h:panelGroup columns="2">
+			<h:form method="post">
+				<h:dataTable value="#{categoryBean.allCategories}" var="category"
+					border="1">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="ID" />
+						</f:facet>
+						<h:outputText value="#{category.id}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Name" />
+						</f:facet>
+						<h:outputText value="#{category.name}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Description" />
+						</f:facet>
+						<h:outputText value="#{category.description}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton
+							action="#{categoryBean.removeCategory(category.id)}"
+							value="Delete" />
+
+						<h:commandButton action="#{categoryBean.modifyCategory(category)}"
+							value="Modify" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+
+		<h:panelGroup columns="2">
+			<h:form method="post">
+				<table>
+<!-- 					<tr>
+						<td><h:outputText value="Category ID" /></td>
+						<td><h:outputText value="#{categoryBean.selectedCategoryId}" /></td>
+					</tr> -->
+					<tr>
+						<td><h:outputText value="Category Name" /></td>
+						<td><h:inputText value="#{categoryBean.name}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Category Description" /></td>
+						<td><h:inputText value="#{categoryBean.description}" /></td>
+					</tr>
+				</table>
+				<tr>
+					<h:commandButton action="#{categoryBean.addCategory()}"
+						value="Create Category" />
+				</tr>
+				<br />
+				<tr>
+					<h:commandButton action="#{categoryBean.updateCategory()}"
+						value="Update Category" />
+				</tr>
+			</h:form>
+		</h:panelGroup>
+		
+	</ui:define>
+</ui:composition>

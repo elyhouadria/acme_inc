@@ -6,6 +6,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import com.ely.entities.OrderLine;
 import com.ely.entities.UserOrder;
 import com.ely.interfaces.ACMEUserOrderServicesRemote;
 
@@ -18,18 +20,18 @@ public class ACMEUserOrderServices implements ACMEUserOrderServicesRemote {
 	EntityManager em;
 	
 	@Override
-	public int AddUserOrder(UserOrder userOrder) {
+	public int addUserOrder(UserOrder userOrder) {
 		em.persist(userOrder);
 		return userOrder.getId();
 	}
 	
 	@Override
-	public void DeleteUserOrder(int userOrderId) {
+	public void deleteUserOrder(int userOrderId) {
 		em.remove(em.find(UserOrder.class, userOrderId));
 	}
 	
 	@Override
-	public void UpdateUserOrder(UserOrder userorder) {
+	public void updateUserOrder(UserOrder userorder) {
 		em.merge(userorder);
 	}
 	
@@ -39,4 +41,9 @@ public class ACMEUserOrderServices implements ACMEUserOrderServicesRemote {
 		return allUserOrders;
 	}
 	
+	@Override
+	public List<OrderLine> getUserOrderOrderlines(int userOrderId){ 
+	List<OrderLine> userOrderOrderLines = em.createQuery("select e from OrderLine e where e.id=:userOrderId", OrderLine.class).getResultList();
+			return userOrderOrderLines;
+	}
 }

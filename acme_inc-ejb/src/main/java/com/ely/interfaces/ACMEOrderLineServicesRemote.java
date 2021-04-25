@@ -8,8 +8,8 @@ import com.ely.entities.OrderLine;
 
 public interface ACMEOrderLineServicesRemote {
 
-	int AddOrderLine(OrderLine orderLine);
-	void DeleteUser(int orderLineId);
+	int addOrderLine(OrderLine orderLine);
+	void deleteOrderLine(int orderLineId);
 	void updateOrderLine(OrderLine orderline);
 
 }

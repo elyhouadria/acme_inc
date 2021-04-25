@@ -62,6 +62,29 @@ public class UserOrder implements Serializable {
 
 	public UserOrder() {}
 
+	public UserOrder(Date orderDate, Date shippingDate, OrderStatus orderStatus, Double totalPrice, User user, 	Adress adress, Shipping shipping, Payement payement) {
+		this.orderDate = orderDate;
+		this.shippingDate = shippingDate;
+		this.orderstatus = orderStatus;
+		this.totalPrice = totalPrice;
+		this.user = user;
+		this.adress =adress;
+		this.shipping = shipping;
+		this.payement = payement;
+	}
+	
+	public UserOrder(int id,  Date orderDate, Date shippingDate, OrderStatus orderStatus, Double totalPrice, User user, 	Adress adress, Shipping shipping, Payement payement) {
+		this.id = id;
+		this.orderDate = orderDate;
+		this.shippingDate = shippingDate;
+		this.orderstatus = orderStatus;
+		this.totalPrice = totalPrice;
+		this.user = user;
+		this.adress =adress;
+		this.shipping = shipping;
+		this.payement = payement;
+	}
+
 	public int getId() {
 		return id;
 	}

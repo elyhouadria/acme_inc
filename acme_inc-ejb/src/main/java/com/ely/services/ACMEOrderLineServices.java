@@ -1,5 +1,7 @@
 package com.ely.services;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,13 +18,13 @@ public class ACMEOrderLineServices implements ACMEOrderLineServicesRemote {
 	EntityManager em;
 	
 	@Override
-	public int AddOrderLine(OrderLine orderLine) {
+	public int addOrderLine(OrderLine orderLine) {
 		em.persist(orderLine);
 		return orderLine.getId();
 	}
 	
 	@Override
-	public void DeleteUser(int orderLineId) {
+	public void deleteOrderLine(int orderLineId) {
 		em.remove(em.find(OrderLine.class, orderLineId));
 	}
 	
@@ -31,4 +33,10 @@ public class ACMEOrderLineServices implements ACMEOrderLineServicesRemote {
 		em.merge(orderline);
 	}
 	
+	public List<OrderLine> getAllOrderLines(){
+		List<OrderLine> allOrderLines = em.createQuery("select e from OrderLine e", OrderLine.class).getResultList();
+		return allOrderLines;
+	}
+	
+
 }

@@ -13,30 +13,49 @@ import javax.persistence.OneToMany;
 
 @Entity
 
-public class Product implements Serializable{
-	
+public class Product implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String productName;
 	private String productDescription;
 	private Double productPrice;
 	private String imageURL;
-	
+
 	@ManyToOne
-	@JoinColumn(name="fk_categoryid")
+	@JoinColumn(name = "fk_categoryid")
 	private Category category;
-	
-	
-	@OneToMany(mappedBy="product")
+
+	@OneToMany(mappedBy = "product")
 	private List<OrderLine> productOrderLines;
-	
-	@OneToMany(mappedBy="product")
+
+	@OneToMany(mappedBy = "product")
 	private List<Review> productReviews;
 
-	public Product() {}
+	public Product() {
+	}
+
+	public Product(String productName, String productDescription, Double productPrice, String imageURL,
+			Category category) {
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.imageURL = imageURL;
+		this.category = category;
+	}
+
+	public Product(int id, String productName, String productDescription, Double productPrice,
+			String imageURL, Category category) {
+		this.id = id;
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.imageURL = imageURL;
+		this.category = category;
+	}
 
 	public int getId() {
 		return id;
@@ -101,5 +120,5 @@ public class Product implements Serializable{
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
 	}
-	
+
 }

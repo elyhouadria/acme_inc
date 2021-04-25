@@ -19,13 +19,13 @@ public class ACMECategoryServices implements ACMECategoryServicesRemote {
 	EntityManager em;
 
 	@Override
-	public int AddCategory(Category category) {
+	public int addCategory(Category category) {
 		em.persist(category);
 		return category.getId();
 	}
 
 	@Override
-	public void DeleteCatgeory(int categoryId) {
+	public void deleteCategory(int categoryId) {
 		em.remove(em.find(Category.class, categoryId));
 	}
 
