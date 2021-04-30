@@ -37,6 +37,12 @@ public class Payement implements Serializable {
 	private UserOrder userorder;
 
 	public Payement() {}
+	public Payement(Double amount, PayementStatus payementStatus, PayementType payementType, String currency) {
+		this.amount = amount;
+		this.payementStatus = payementStatus;
+		this.payementType = payementType;
+		this.currency = currency;
+	}
 
 	public Payement(Double amount, PayementStatus payementStatus, PayementType payementType, String currency, UserOrder userOrder) {
 		this.amount = amount;
@@ -101,4 +107,33 @@ public class Payement implements Serializable {
 	public void setUserOrder(UserOrder userorder) {
 		this.userorder = userorder;
 	}
+
+	@Override
+	public String toString() {
+//		return id + ", " + amount + ", " + currency + ", " + payementStatus + ", " + payementType;
+		return String.valueOf(id);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Payement other = (Payement) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
 }

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0
+Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+
+	<ui:define name="content">
+		<h:panelGroup>
+			<h:form method="Post">
+				<h:dataTable value="#{userOrderBean.getAllUserOrders}"
+					var="userorder" border="1">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="User Order" />
+						</f:facet>
+						<h:outputText value="#{userorder}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="User" />
+						</f:facet>
+						<h:outputText value="#{userorder.user}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Adress" />
+						</f:facet>
+						<h:outputText value="#{userorder.adress}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Shipping" />
+						</f:facet>
+						<h:outputText value="#{userorder.shipping}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Payement" />
+						</f:facet>
+						<h:outputText value="#{userorder.payement}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton
+							action="#{userOrderBean.removeUserOrder(userorder.id)}"
+							value="Delete" />
+						<h:commandButton
+							action="#{userOrderBean.modifyUserOrder(userorder)}"
+							value="Modify" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+
+		<h:panelGroup columns="2">
+			<h:form method="post">
+				<table>
+					<tr>
+						<td><h:outputText value="User Order Date dd-MM-yyyy" /></td>
+						<td><h:inputText value="#{userOrderBean.orderDate}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="User Order Shipping Date dd-MM-yyyy" /></td>
+						<td><h:inputText value="#{userOrderBean.shippingDate}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:inputText></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="User Order totalPrice" /></td>
+						<td><h:inputText value="#{userOrderBean.totalPrice}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="User" /> <h:selectOneMenu
+								value="#{userOrderBean.user}" >
+								<f:selectItem itemLabel="Select User" itemValue="#{null}" />
+								<f:selectItems value="#{userBean.getAllUsers}" var="user"
+									itemValue="#{user.id}" itemLabel="#{user}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Adress" /> <h:selectOneMenu
+								value="#{userOrderBean.adress}" >
+								<f:selectItem itemLabel="Select adress" itemValue="#{null}" />
+								<f:selectItems value="#{adressBean.getAllAdresses}" var="adress"
+									itemValue="#{adress.id}" itemLabel="#{adress}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Shipping" /> <h:selectOneMenu
+								value="#{userOrderBean.shipping}" >
+								<f:selectItem itemLabel="Select shipping" itemValue="#{null}" />
+								<f:selectItems value="#{shippingBean.allShippings}" var="#{shipping}"
+									itemValue="#{shipping.id}" itemLabel="#{shipping}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Payement" /> <h:selectOneMenu
+								value="#{userOrderBean.payement}">
+								<f:selectItem itemLabel="Select Payement" itemValue="#{null}" />
+								<f:selectItems value="#{payementBean.getAllPayements}"
+									var="payement" itemValue="#{payement.id}"
+									itemLabel="#{payement}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="User Order Status" /> <h:selectOneMenu
+								value="#{userOrderBean.orderStatus}">
+								<f:selectItem itemLabel="Select Order Status" itemValue="#{null}" />
+								<f:selectItems value="#{dataBean.orderStatus}" />
+							</h:selectOneMenu></td>
+					</tr>
+				</table>
+				<tr>
+					<h:commandButton action="#{userOrderBean.addUserOrder()}"
+						value="Create user order" />
+				</tr>
+				<br />
+				<tr>
+					<h:commandButton action="#{userOrderBean.updateUserOrder()}"
+						value="Update user order" />
+				</tr>
+			</h:form>
+		</h:panelGroup>
+
+
+
+	</ui:define>
+
+</ui:composition>

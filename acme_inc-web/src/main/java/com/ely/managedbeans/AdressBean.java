@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.ely.entities.Adress;
 import com.ely.entities.User;
+import com.ely.interfaces.ACMEAdressServicesRemote;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-import com.ely.services.ACMEAdressServices;
 
 @ManagedBean(name="adressBean")
 @SessionScoped
@@ -30,20 +30,25 @@ public class AdressBean implements Serializable {
 	private String city;
 	private String country;
 	private User user;
+
 	
 	private List<Adress> getAdressByUserId;
 	private List<Adress> getAllAdresses;
 	
 	@EJB
-	ACMEAdressServices acmeadressservices;
+	ACMEAdressServicesRemote acmeAdressServicesRemote;
 	
+	@PostConstruct
+	public void init() { 
+		getAllAdresses = acmeAdressServicesRemote.getAllAdresses();	
+	}
 	
 	public void addAdress() {
 		Adress adress = new Adress(lastName, firstName,adressLine1, adressLine2, zipCode, city, country, user);
 		User selectedUser = new User();
 		selectedUser.setId(selectedUserId);
 		adress.setUser(selectedUser);
-		acmeadressservices.addAdress(adress);
+		acmeAdressServicesRemote.addAdress(adress);
 	}
 	
 	public void modifyAdress(Adress adress) {
@@ -55,15 +60,15 @@ public class AdressBean implements Serializable {
 		this.setZipCode(adress.getZipCode());
 		this.setCity(adress.getCity());
 		this.setCountry(adress.getCountry());
-		this.setUser(adress.getUser());
+		this.setSelectedUserId((adress.getUser()).getId());
 	}
 	
 	public void removeAdress(int adressId) {
-		acmeadressservices.deleteAdress(adressId);
+		acmeAdressServicesRemote.deleteAdress(adressId);
 	}
 	
 	public void updateAdress() {
-		acmeadressservices.updateAdress(new Adress(selectedAdressId, lastName, firstName, adressLine1, adressLine2, zipCode, city, country, user));
+		acmeAdressServicesRemote.updateAdress(new Adress(selectedAdressId, lastName, firstName, adressLine1, adressLine2, zipCode, city, country, acmeAdressServicesRemote.findUserById(selectedUserId)));
 	}
 
 	public String getLastName() {
@@ -131,7 +136,7 @@ public class AdressBean implements Serializable {
 	}
 
 	public List<Adress> getGetAllAdresses() {
-		getAllAdresses = acmeadressservices.getAllAdresses();
+		getAllAdresses = acmeAdressServicesRemote.getAllAdresses();
 		return getAllAdresses;
 	}
 
@@ -162,5 +167,6 @@ public class AdressBean implements Serializable {
 	public void setSelectedAdressId(int selectedAdressId) {
 		this.selectedAdressId = selectedAdressId;
 	}
+
 	
 }

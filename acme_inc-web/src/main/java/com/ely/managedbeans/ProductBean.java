@@ -3,13 +3,14 @@ package com.ely.managedbeans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.ely.entities.Category;
 import com.ely.entities.Product;
-import com.ely.services.ACMEProductServices;
+import com.ely.interfaces.ACMEProductServicesRemote;
 
 @ManagedBean(name = "productBean")
 @SessionScoped
@@ -25,11 +26,17 @@ public class ProductBean implements Serializable {
 	private double doubleProductPrice;
 	private String imageURL;
 	private Category category;
+	
+	private List<Product> getAllProducts;
 
 	@EJB
-	ACMEProductServices acmeproductservices;
-
-	private List<Product> getAllProducts;
+	ACMEProductServicesRemote acmeProductServicesRemote;
+	
+	
+	@PostConstruct
+	public void init() { 
+		getAllProducts = acmeProductServicesRemote.getAllProducts();	
+	}
 
 	public void modifyProduct(Product product) {
 		this.setSelectedProductId(product.getId());
@@ -37,25 +44,24 @@ public class ProductBean implements Serializable {
 		this.setProductDescription(product.getProductDescription());
 		this.setDoubleProductPrice(product.getProductPrice());
 		this.setImageURL(product.getImageURL());
-		this.setCategory(product.getCategory());
-
+		this.setSelectedCategorytId(product.getCategory().getId());
 	}
 
 	public void addProduct() {
 		Product product = new Product(productName, productDescription, doubleProductPrice, imageURL, category);
 		Category selectedCategory = new Category();
-		selectedCategory.setId(selectedProductId);
+		selectedCategory.setId(selectedCategorytId);
 		product.setCategory(selectedCategory);
-		acmeproductservices.AddProduct(product);
+		acmeProductServicesRemote.AddProduct(product);
 	}
 
 	public void updateProduct() {
-		acmeproductservices.UpdateProduct(new Product(selectedProductId, productName, productDescription,
-				doubleProductPrice, imageURL, category));
+		acmeProductServicesRemote.UpdateProduct(new Product(selectedProductId, productName, productDescription,
+				doubleProductPrice, imageURL, acmeProductServicesRemote.findCategoryById(selectedCategorytId)));
 	}
 
 	public void removeProduct(int productId) {
-		acmeproductservices.DeleteProduct(productId);
+		acmeProductServicesRemote.DeleteProduct(productId);
 	}
 
 	public int getSelectedProductId() {
@@ -107,7 +113,7 @@ public class ProductBean implements Serializable {
 	}
 
 	public List<Product> getGetAllProducts() {
-		getAllProducts = acmeproductservices.getAllProducts();
+		getAllProducts = acmeProductServicesRemote.getAllProducts();
 		return getAllProducts;
 	}
 
@@ -122,4 +128,6 @@ public class ProductBean implements Serializable {
 	public void setDoubleProductPrice(double doubleProductPrice) {
 		this.doubleProductPrice = doubleProductPrice;
 	}
+	
+	
 }

@@ -1,11 +1,12 @@
 package com.ely.services;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.ely.entities.OrderLine;
 import com.ely.entities.Payement;
 import com.ely.interfaces.ACMEPayementServicesRemote;
 
@@ -31,6 +32,12 @@ public class ACMEPayementServices implements ACMEPayementServicesRemote {
 	@Override
 	public void UpdatePayement(Payement payement) {
 		em.merge(payement);
+	}
+	
+	@Override
+	public List<Payement> getAllPayements() {
+		List<Payement> allProducts = em.createQuery("select e from Payement e", Payement.class).getResultList();				
+		return allProducts;
 	}
 	
 	

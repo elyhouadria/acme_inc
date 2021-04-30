@@ -1,6 +1,7 @@
 com\ely\entities\Category.class
 com\ely\services\ACMEUserOrderServices.class
 com\ely\interfaces\ACMEOrderLineServicesRemote.class
+com\ely\interfaces\ACMEShippingServicesRemote.class
 com\ely\entities\Shipping.class
 com\ely\services\ACMEPayementServices.class
 com\ely\entities\OrderLine.class
@@ -11,6 +12,7 @@ com\ely\enums\UserRole.class
 com\ely\interfaces\ACMEUserOrderServicesRemote.class
 com\ely\entities\Payement.class
 com\ely\entities\Product.class
+com\ely\services\ACMEShippingServices.class
 com\ely\enums\PayementStatus.class
 com\ely\services\ACMECategoryServices.class
 com\ely\entities\User.class

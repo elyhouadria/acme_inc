@@ -21,4 +21,6 @@ public interface ACMECategoryServicesRemote {
 
 	List<Category> getAllCategories();
 	
+	public Category findCategoryById(int categoryId);
+	
 }

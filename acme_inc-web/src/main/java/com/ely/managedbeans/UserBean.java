@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,14 +16,13 @@ import com.ely.entities.User;
 import com.ely.enums.UserRole;
 import com.ely.interfaces.ACMEUserServicesRemote;
 
-@ManagedBean(name="userBean")
+@ManagedBean(name = "userBean")
 @SessionScoped
 
 public class UserBean implements Serializable {
-	
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -31,15 +31,21 @@ public class UserBean implements Serializable {
 	private Boolean isActive;
 	private int selectedUserId;
 	private UserRole userRole;
-	
+	private User emptyUser;
+
 	private List<Adress> userAdresses;
 	private List<Review> userReviews;
 	private List<Order> userOrders;
-	
+
 	private List<User> getAllUsers;
-		
+
 	@EJB
 	ACMEUserServicesRemote acmeUserServicesRemote;
+	
+	@PostConstruct
+	public void init() { 
+		getAllUsers= acmeUserServicesRemote.getAllUsers();	
+	}
 	
 	public void modifyUser(User user) {
 		this.setFirstName(user.getFirstName());
@@ -51,22 +57,25 @@ public class UserBean implements Serializable {
 		this.setUserRole(user.getUserRole());
 		this.setSelectedUserId(user.getId());
 	}
-	
+
 	public void addUser() {
-		acmeUserServicesRemote.addUser(new User(firstName,lastName,email,password,creationDate,isActive,userRole));
+		acmeUserServicesRemote
+				.addUser(new User(firstName, lastName, email, password, creationDate, isActive, userRole));
 	}
-	
+
 	public void removeUser(int userId) {
 		acmeUserServicesRemote.deleteUser(userId);
 	}
-	
+
 	public void updateUser() {
-		acmeUserServicesRemote.updateUser(new User(selectedUserId, firstName, lastName, email, password, creationDate, isActive, userRole));
-	}	
-	
+		acmeUserServicesRemote.updateUser(
+				new User(selectedUserId, firstName, lastName, email, password, creationDate, isActive, userRole));
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -106,18 +115,23 @@ public class UserBean implements Serializable {
 	public List<Adress> getUserAdresses() {
 		return userAdresses;
 	}
+
 	public void setUserAdresses(List<Adress> userAdresses) {
 		this.userAdresses = userAdresses;
 	}
+
 	public List<Review> getUserReviews() {
 		return userReviews;
 	}
+
 	public void setUserReviews(List<Review> userReviews) {
 		this.userReviews = userReviews;
 	}
+
 	public List<Order> getUserOrders() {
 		return userOrders;
 	}
+
 	public void setUserOrders(List<Order> userOrders) {
 		this.userOrders = userOrders;
 	}
@@ -126,7 +140,7 @@ public class UserBean implements Serializable {
 		getAllUsers = acmeUserServicesRemote.getAllUsers();
 		return getAllUsers;
 	}
-	
+
 	public void setGetAllUsers(List<User> getAllUsers) {
 		this.getAllUsers = getAllUsers;
 	}
@@ -150,11 +164,17 @@ public class UserBean implements Serializable {
 	public void setSelectedUserId(int selectedUserId) {
 		this.selectedUserId = selectedUserId;
 	}
-	
-		public int getSelectedUserId() {
+
+	public int getSelectedUserId() {
 		return selectedUserId;
 	}
 
-	
-	
+	public User getEmptyUser() {
+		return emptyUser;
+	}
+
+	public void setEmptyUser(User emptyUser) {
+		this.emptyUser = emptyUser;
+	}
+
 }

@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.ely.entities.OrderLine;
+import com.ely.entities.Product;
+import com.ely.entities.UserOrder;
 import com.ely.interfaces.ACMEOrderLineServicesRemote;
 
 
@@ -38,5 +40,13 @@ public class ACMEOrderLineServices implements ACMEOrderLineServicesRemote {
 		return allOrderLines;
 	}
 	
+	public UserOrder findUserOrderById(int userOrderId) {
+		UserOrder userOrder = em.find(UserOrder.class, userOrderId);
+		return userOrder;
+	}
+	public Product findProductById(int productId) {
+		Product product = em.find(Product.class, productId);
+		return product;
+	}
 
 }

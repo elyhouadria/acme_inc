@@ -47,5 +47,10 @@ public class ACMECategoryServices implements ACMECategoryServicesRemote {
 				.getResultList();
 		return getCategoryProducts;
 	}
+	
+	public Category findCategoryById(int categoryId) {
+		Category category = em.find(Category.class, categoryId);
+		return category;
+	}
 
 }

@@ -3,6 +3,7 @@ package com.ely.managedbeans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -26,11 +27,17 @@ public class PayementBean implements Serializable {
 	private PayementStatus payementStatus;
 	private PayementType payementType;
 	private UserOrder userOrder;
+	private Payement emptyPayement;
 	
 	private List<Payement> getAllPayements;
 	
 	@EJB
 	ACMEPayementServicesRemote acmePayementServicesRemote;
+	
+	@PostConstruct
+	public void init() { 
+		getAllPayements= acmePayementServicesRemote.getAllPayements();	
+	}
 	
 	public void modifyPayement(Payement payement) {
 		this.setSelectedPayement(payement.getId());
@@ -40,7 +47,7 @@ public class PayementBean implements Serializable {
 	}
 	
 	public void addPayement() {
-		acmePayementServicesRemote.AddPayement(new Payement(amount, payementStatus, payementType, currency, userOrder));
+		acmePayementServicesRemote.AddPayement(new Payement(amount, payementStatus, payementType, currency));
 	}
 	
 	public void updatePayement() {
@@ -85,6 +92,7 @@ public class PayementBean implements Serializable {
 	}
 
 	public List<Payement> getGetAllPayements() {
+		getAllPayements = acmePayementServicesRemote.getAllPayements();
 		return getAllPayements;
 	}
 
@@ -106,6 +114,14 @@ public class PayementBean implements Serializable {
 
 	public void setPayementType(PayementType payementType) {
 		this.payementType = payementType;
+	}
+
+	public Payement getEmptyPayement() {
+		return emptyPayement;
+	}
+
+	public void setEmptyPayement(Payement emptyPayement) {
+		this.emptyPayement = emptyPayement;
 	}
 	
 	

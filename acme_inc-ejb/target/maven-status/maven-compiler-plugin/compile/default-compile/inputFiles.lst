@@ -13,8 +13,10 @@ C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\ent
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\services\ACMEAdressServices.java
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\services\ACMECategoryServices.java
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\services\ACMEProductServices.java
+C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\interfaces\ACMEShippingServicesRemote.java
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\interfaces\ACMECategoryServicesRemote.java
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\entities\Review.java
+C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\services\ACMEShippingServices.java
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\services\ACMEUserOrderServices.java
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\services\ACMEOrderLineServices.java
 C:\Users\ely66\eclipse-workspace\acme_inc\acme_inc-ejb\src\main\java\com\ely\interfaces\ACMEReviewServicesRemote.java

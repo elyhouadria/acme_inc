@@ -35,8 +35,7 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product")
 	private List<Review> productReviews;
 
-	public Product() {
-	}
+	public Product() {}
 
 	public Product(String productName, String productDescription, Double productPrice, String imageURL,
 			Category category) {
@@ -120,5 +119,34 @@ public class Product implements Serializable {
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
 	}
+
+	@Override
+	public String toString() {
+//		return id + ", " + productName + ", " + productDescription + ", " + productPrice;
+		return String.valueOf(id);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
 
 }

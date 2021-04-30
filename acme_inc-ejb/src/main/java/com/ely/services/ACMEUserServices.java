@@ -91,4 +91,9 @@ public class ACMEUserServices implements ACMEUserServicesRemote {
 		}
 		return user;
 	}
+	
+	public User findUserById(int userId) {
+		User user = em.find(User.class, userId);
+		return user;
+	}
 }

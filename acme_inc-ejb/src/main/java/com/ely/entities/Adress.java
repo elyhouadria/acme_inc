@@ -151,4 +151,32 @@ public class Adress implements Serializable {
 		this.user = user;
 		
 	}
+
+	@Override
+	public String toString() {
+//		return id + ", " + lastName + ", " + firstName + ", " + adressLine1 + ", " + adressLine2 + ", " + zipCode + ", " + city	+ ", " + country;
+		return String.valueOf(id);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Adress other = (Adress) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 }

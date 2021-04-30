@@ -2,7 +2,11 @@ package com.ely.interfaces;
 
 import java.util.List;
 
+import javax.ejb.Remote;
+
 import com.ely.entities.Shipping;
+
+@Remote
 
 public interface ACMEShippingServicesRemote {
 

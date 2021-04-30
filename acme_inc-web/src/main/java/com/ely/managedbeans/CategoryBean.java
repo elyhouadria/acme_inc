@@ -3,7 +3,7 @@ package com.ely.managedbeans;
 import java.io.Serializable;
 import java.util.List;
 
-
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 
 import com.ely.entities.Category;
 import com.ely.entities.Product;
-import com.ely.services.ACMECategoryServices;
+import com.ely.interfaces.ACMECategoryServicesRemote;
 
 @ManagedBean(name = "categoryBean")
 @SessionScoped
@@ -29,7 +29,12 @@ public class CategoryBean implements Serializable{
 	private List<Product> productsInCategory;
 	
 	@EJB
-	ACMECategoryServices acmecategoryservices;
+	ACMECategoryServicesRemote acmeCategoryServicesRemote;
+	
+	@PostConstruct
+	public void init() { 
+		getAllCategories= acmeCategoryServicesRemote.getAllCategories();	
+	}
 	
 	public void modifyCategory(Category category) {
 		this.setSelectedCategoryId(category.getId());
@@ -38,14 +43,14 @@ public class CategoryBean implements Serializable{
 	}
 	
 	public void addCategory() {
-		acmecategoryservices.addCategory(new Category(name, description));		
+		acmeCategoryServicesRemote.addCategory(new Category(name, description));		
 	}
 	public void removeCategory(int categoryId) {
-		acmecategoryservices.deleteCategory(categoryId);
+		acmeCategoryServicesRemote.deleteCategory(categoryId);
 	}
 	
 	public void updateCategory() {
-		acmecategoryservices.updateCategory(new Category(selectedCategoryId, name, description));
+		acmeCategoryServicesRemote.updateCategory(new Category(selectedCategoryId, name, description));
 	}
 	
 	public String getName() {
@@ -61,7 +66,7 @@ public class CategoryBean implements Serializable{
 		this.description = description;
 	}
 	public List<Category> getAllCategories() {
-		getAllCategories = acmecategoryservices.getAllCategories();
+		getAllCategories = acmeCategoryServicesRemote.getAllCategories();
 		return getAllCategories;
 	}
 	public void setAllCategories(List<Category> getAllCategories) {
@@ -79,5 +84,4 @@ public class CategoryBean implements Serializable{
 	public void setSelectedCategoryId(int selectedCategoryId) {
 		this.selectedCategoryId = selectedCategoryId;
 	}
-	
 }

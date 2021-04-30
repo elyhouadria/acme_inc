@@ -18,4 +18,5 @@ public interface ACMEUserServicesRemote {
 	void updateUser(User user);
 	User getUserByEmailAndPassword(String email, String password);
 	public List<User> getAllUsers();
+	public User findUserById(int userId);
 }

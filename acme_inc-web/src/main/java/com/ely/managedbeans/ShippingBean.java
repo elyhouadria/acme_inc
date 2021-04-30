@@ -3,6 +3,7 @@ package com.ely.managedbeans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -10,7 +11,7 @@ import javax.faces.bean.SessionScoped;
 import com.ely.entities.Shipping;
 import com.ely.interfaces.ACMEShippingServicesRemote;
 
-@ManagedBean
+@ManagedBean(name = "shippingBean")
 @SessionScoped
 
 public class ShippingBean implements Serializable {
@@ -21,11 +22,17 @@ public class ShippingBean implements Serializable {
 	private int selectedShipping;
 	private String shippingName;
 	private Double shippingPrice;
+	private Shipping emptyShipping;
 	
 	private List<Shipping> allShippings;
 	
 	@EJB
 	ACMEShippingServicesRemote acmeShippingServicesRemote;
+	
+	@PostConstruct
+	public void init() { 
+		allShippings = acmeShippingServicesRemote.getAllShippings();	
+	}
 	
 	public void modifyShipping(Shipping shipping) {
 		this.setSelectedShipping(shipping.getId());
@@ -78,5 +85,15 @@ public class ShippingBean implements Serializable {
 	public void setSelectedShipping(int selectedShipping) {
 		this.selectedShipping = selectedShipping;
 	}
+
+	public Shipping getEmptyShipping() {
+		return emptyShipping;
+	}
+
+	public void setEmptyShipping(Shipping emptyShipping) {
+		this.emptyShipping = emptyShipping;
+	}
+
+	
 
 }

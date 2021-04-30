@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.ely.entities.User;
-import com.ely.services.ACMEUserServices;
+import com.ely.interfaces.ACMEUserServicesRemote;
 
 
 @ManagedBean(name="loginBean")
@@ -26,11 +26,11 @@ public class LoginBean implements Serializable{
 	private Boolean loggedIn;
 	
 	@EJB
-	ACMEUserServices acmeUserServices;
+	ACMEUserServicesRemote acmeUserServicesRemote;
 	
 	public String doLogin() {
 		String navigateTo = "null";
-		user = acmeUserServices.getUserByEmailAndPassword(email, password);
+		user = acmeUserServicesRemote.getUserByEmailAndPassword(email, password);
 		if (user != null) {
 			navigateTo = "/pages/welcome?faces-redirect=true";
 			loggedIn = true;
@@ -77,13 +77,5 @@ public class LoginBean implements Serializable{
 
 	public void setLoggedIn(Boolean loggedIn) {
 		this.loggedIn = loggedIn;
-	}
-
-	public ACMEUserServices getAcmeUserServices() {
-		return acmeUserServices;
-	}
-
-	public void setAcmeUserServices(ACMEUserServices acmeuserservices) {
-		this.acmeUserServices = acmeuserservices;
 	}
 }

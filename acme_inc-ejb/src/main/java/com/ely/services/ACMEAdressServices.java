@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.ely.entities.Adress;
+import com.ely.entities.Product;
+import com.ely.entities.User;
 import com.ely.interfaces.ACMEAdressServicesRemote;
 @Stateless
 @LocalBean
@@ -42,5 +44,14 @@ public class ACMEAdressServices implements ACMEAdressServicesRemote {
 	public List<Adress> getAdressesByUserId(int userId){
 		List<Adress> userAdresses = em.createQuery("select e from Adress e where e.id=:userId", Adress.class).getResultList();
 		return userAdresses;
+	}
+	
+	public User findUserById(int userId) {
+		User user = em.find(User.class, userId);
+		return user;
+	}
+	public Product findProductById(int productId) {
+		Product product = em.find(Product.class, productId);
+		return product;
 	}
 }

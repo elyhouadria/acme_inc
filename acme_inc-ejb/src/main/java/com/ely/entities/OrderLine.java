@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
 
 public class OrderLine implements Serializable {
@@ -27,7 +28,7 @@ public class OrderLine implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderLineDate;
 	
-	private double itemPrice;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="fk_productid")
@@ -36,20 +37,37 @@ public class OrderLine implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="fk_userorderid")
 	private UserOrder userorder;
+	
+	private double orderLinePrice;
 
 	public OrderLine() {}
-
-	public OrderLine(Date orderLineDate, Double itemPrice, Product product, UserOrder userOrder) {
+	
+	public OrderLine(Date orderLineDate, int quantity, Double itemPrice) {
 		this.orderLineDate = orderLineDate;
-		this.itemPrice = itemPrice;
+		this.quantity = quantity;
+		this.orderLinePrice = itemPrice;
+	}
+	
+	public OrderLine(Date orderLineDate, int quantity, Double itemPrice, Product product) {
+		this.orderLineDate = orderLineDate;
+		this.quantity = quantity;
+		this.orderLinePrice = itemPrice;
 		this.product = product;
-		this.userorder = userOrder;
+	}
+	
+	public OrderLine(Date orderLineDate, int quantity, Double itemPrice, Product product, UserOrder userOrder) {
+		this.orderLineDate = orderLineDate;
+		this.quantity = quantity;
+		this.orderLinePrice = itemPrice;
+		this.product = product;
+		this.userorder= userOrder;
 	}
 
-	public OrderLine(int id, Date orderLineDate, Double itemPrice, Product product, UserOrder userOrder) {
+	public OrderLine(int id, int quantity, Date orderLineDate, Double itemPrice, Product product, UserOrder userOrder) {
 		this.id = id;
 		this.orderLineDate = orderLineDate;
-		this.itemPrice = itemPrice;
+		this.quantity = quantity;
+		this.orderLinePrice = itemPrice;
 		this.product = product;
 		this.userorder = userOrder;
 	}
@@ -78,12 +96,12 @@ public class OrderLine implements Serializable {
 		this.orderLineDate = orderLineDate;
 	}
 
-	public double getItemPrice() {
-		return itemPrice;
+	public double getOrderLinePrice() {
+		return orderLinePrice;
 	}
 
-	public void setItemPrice(double itemPrice) {
-		this.itemPrice = itemPrice;
+	public void setOrderLinePrice(double itemPrice) {
+		this.orderLinePrice = itemPrice;
 	}
 
 	public Product getProduct() {
@@ -98,7 +116,37 @@ public class OrderLine implements Serializable {
 		return userorder;
 	}
 
-	public void setOrder(UserOrder userorder) {
+	public void setUserOrder(UserOrder userorder) {
 		this.userorder = userorder;
-	}	
+	}
+
+	@Override
+	public String toString() {
+//		return id + ", " + quantity + ", " + orderLineDate + ", " + itemPrice + ", " + product;
+		return String.valueOf(id);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderLine other = (OrderLine) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
 }

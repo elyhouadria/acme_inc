@@ -1,8 +1,9 @@
 package com.ely.interfaces;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
-import com.ely.entities.OrderLine;
 import com.ely.entities.Payement;
 
 @Remote
@@ -14,5 +15,7 @@ public interface ACMEPayementServicesRemote {
 	void DeletePayement(int payementId);
 
 	void UpdatePayement(Payement payement);
+
+	List<Payement> getAllPayements();
 
 }

@@ -30,6 +30,26 @@ public class Review implements Serializable {
 	private User user;
 
 	public Review() {}
+	
+	public Review(String reviewString, int rating) {
+		this.reviewString = reviewString;
+		this.rating = rating;
+	}
+
+	public Review(String reviewString, int rating, User user, Product product) {
+		this.reviewString = reviewString;
+		this.rating = rating;
+		this.user = user;
+		this.product = product;
+	}
+	
+	public Review(int id, String reviewString, int rating, User user, Product product) {
+		this.id = id;
+		this.reviewString = reviewString;
+		this.rating = rating;
+		this.user = user;
+		this.product = product;
+	}
 
 	public int getId() {
 		return id;
@@ -70,4 +90,34 @@ public class Review implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+//		return id + ", " + reviewString + ", " + rating + ", " + product + ", " + user;
+		return String.valueOf(id);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Review other = (Review) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
 }

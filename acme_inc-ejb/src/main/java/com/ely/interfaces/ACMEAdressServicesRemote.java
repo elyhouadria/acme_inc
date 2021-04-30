@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import com.ely.entities.Adress;
+import com.ely.entities.User;
 
 @Remote
 
@@ -17,5 +18,7 @@ public interface ACMEAdressServicesRemote {
 	void updateAdress(Adress adress);
 
 	List<Adress> getAllAdresses();
+	
+	public User findUserById(int userId);
 		
 }

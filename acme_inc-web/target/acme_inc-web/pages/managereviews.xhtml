@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0
+Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/template.xhtml">
+
+	<ui:define name="content">
+		<h:panelGroup>
+			<h:form method="Post">
+				<h:dataTable value="#{reviewBean.getAllReviews}" var="review"
+					border="1">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Reviews" />
+						</f:facet>
+						<h:outputText value="#{review}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Product" />
+						</f:facet>
+						<h:outputText value="#{review.product}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="User" />
+						</f:facet>
+						<h:outputText value="#{review.user}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
+						</f:facet>
+						<h:commandButton action="#{reviewBean.removeReview(review.id)}"
+							value="Delete" />
+						<h:commandButton action="#{reviewBean.modifyReview(review)}"
+							value="Modify" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</h:panelGroup>
+		<h:panelGroup columns="2">
+			<h:form method="post">
+				<table>
+					<tr>
+						<td><h:outputText value="Review string" /></td>
+						<td><h:inputText value="#{reviewBean.reviewString}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Review rating" /></td>
+						<td><h:inputText value="#{reviewBean.rating}" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Review Product" /> <h:selectOneMenu
+								value="#{reviewBean.selectedProductId}">
+								<f:selectItem itemLabel="Select Product" itemValue="" />
+								<f:selectItems value="#{productBean.getAllProducts}"
+									var="product" itemValue="#{product.id}" itemLabel="#{product}" />
+							</h:selectOneMenu></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Review User" /> <h:selectOneMenu
+								value="#{reviewBean.selectedUserId}">
+								<f:selectItem itemLabel="Select User" itemValue="" />
+								<f:selectItems value="#{userBean.getAllUsers}" var="user"
+									itemValue="#{user.id}" itemLabel="#{user}" />
+							</h:selectOneMenu></td>
+					</tr>
+				</table>
+				<tr>
+					<h:commandButton action="#{reviewBean.addReview()}"
+						value="Create Review" />
+				</tr>
+				<br />
+				<tr>
+					<h:commandButton action="#{reviewBean.updateReview()}"
+						value="Update review" />
+				</tr>
+			</h:form>
+		</h:panelGroup>
+
+
+
+	</ui:define>
+
+</ui:composition>

@@ -10,7 +10,7 @@ transitional.dtd">
 	<ui:define name="content">
 
 		<h:panelGroup columns="2">
-			<h:form method ="post">
+			<h:form method="post">
 				<h:dataTable value="#{adressBean.getAllAdresses}" var="adress"
 					border="1">
 					<h:column>
@@ -18,15 +18,22 @@ transitional.dtd">
 							<h:outputText value="Adress" />
 						</f:facet>
 						<h:outputText
-							value="#{adress.firstName} #{adress.lastName} #{adress.adressLine1} #{adress.adressLine2} #{adress.zipCode} #{adress.city} #{adress.country}"/>
+							value="#{adress.firstName} #{adress.lastName} #{adress.adressLine1} #{adress.adressLine2} #{adress.zipCode} #{adress.city} #{adress.country}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="Action"/>
+							<h:outputText value="User" />
+						</f:facet>
+						<h:outputText value="#{adress.user}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Action" />
 						</f:facet>
 						<h:commandButton action="#{adressBean.removeAdress(adress.id)}"
 							value="Delete" />
-						<h:commandButton action="#{adressBean.modifyAdress(adress)}" value="Modify"/>
+						<h:commandButton action="#{adressBean.modifyAdress(adress)}"
+							value="Modify" />
 					</h:column>
 				</h:dataTable>
 			</h:form>

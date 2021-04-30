@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.ely.entities.Category;
 import com.ely.entities.Product;
 
 @Remote
@@ -19,5 +20,7 @@ public interface ACMEProductServicesRemote {
 	List<Product> searchProducts(String searchString);
 
 	void UpdateProduct(Product product);
+	
+	public Category findCategoryById(int categoryId);
 
 }

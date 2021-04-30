@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,60 +18,85 @@ import com.ely.entities.UserOrder;
 import com.ely.enums.OrderStatus;
 import com.ely.interfaces.ACMEUserOrderServicesRemote;
 
-@ManagedBean(name="userOrderBean")
+@ManagedBean(name = "userOrderBean")
 @SessionScoped
 
 public class UserOrderBean implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	private int selectedUserOrder;
+
+	private int selectedUserOrderId;
+	private int selectedUserId;
+	private int selectedShippingId;
+	private int selectedPayementId;
+	private int selectedAdressId;
+
 	private Date orderDate;
 	private Date shippingDate;
 	private OrderStatus orderStatus;
 	private Double totalPrice;
+
 	private User user;
 	private Adress adress;
 	private Shipping shipping;
 	private Payement payement;
-	
-	
+
 	private List<OrderLine> productOrderList;
-	
+
 	private List<UserOrder> getAllUserOrders;
 	
+	@PostConstruct
+	public void init() { 
+		getAllUserOrders = acmeUserOrderServicesRemote.getAllUserOrders();	
+	}
+
 	@EJB
 	ACMEUserOrderServicesRemote acmeUserOrderServicesRemote;
-	
+
 	public void modifyUserOrder(UserOrder userorder) {
 		this.setOrderDate(userorder.getOrderDate());
 		this.setShippingDate(userorder.getShippingDate());
 		this.setOrderStatus(userorder.getOrderstatus());
 		this.setTotalPrice(userorder.getTotalPrice());
-		this.setUser(userorder.getUser());
-		this.setAdress(userorder.getAdress());
-		this.setShipping(userorder.getShipping());
-		this.setPayement(userorder.getPayement());
+		this.setSelectedUserId(userorder.getUser().getId());
+		this.setSelectedAdressId(userorder.getAdress().getId());
+		this.setSelectedShippingId(userorder.getShipping().getId());
+		;
+		this.setSelectedPayementId(userorder.getPayement().getId());
 	}
-	
+
 	public void addUserOrder() {
-		acmeUserOrderServicesRemote.addUserOrder(new UserOrder(orderDate, shippingDate, orderStatus, totalPrice, user, adress, shipping, payement));
+		UserOrder userOrder = new UserOrder(orderDate, shippingDate, orderStatus, totalPrice, user, adress, shipping, payement);
+		User selectedUser = new User();
+		Shipping selectedShipping = new Shipping();
+		Payement selectedPayement = new Payement();
+		Adress selectedAdress = new Adress();
+		selectedUser.setId(selectedUserId);
+		selectedAdress.setId(selectedAdressId);
+		selectedShipping.setId(selectedShippingId);
+		selectedPayement.setId(selectedPayementId);
+		userOrder.setUser(selectedUser);
+		userOrder.setAdress(selectedAdress);
+		userOrder.setShipping(selectedShipping);
+		userOrder.setPayement(selectedPayement);
+		acmeUserOrderServicesRemote.addUserOrder(userOrder);
 	}
-	
+
 	public void removeUserOrder(int userOrderId) {
 		acmeUserOrderServicesRemote.deleteUserOrder(userOrderId);
 	}
-	
+
 	public void updateUserOrder() {
-		acmeUserOrderServicesRemote.updateUserOrder(new UserOrder(selectedUserOrder, orderDate, shippingDate, orderStatus, totalPrice, user, adress, shipping, payement));
-	}
-	
-	public int getSelectedUserOrder() {
-		return selectedUserOrder;
+		acmeUserOrderServicesRemote.updateUserOrder(new UserOrder(selectedUserOrderId, orderDate, shippingDate,
+				orderStatus, totalPrice, user, adress, shipping, payement));
 	}
 
-	public void setSelectedUserOrder(int selectedUserOrder) {
-		this.selectedUserOrder = selectedUserOrder;
+	public int getSelectedUserOrderId() {
+		return selectedUserOrderId;
+	}
+
+	public void setSelectedUserOrderId(int selectedUserOrder) {
+		this.selectedUserOrderId = selectedUserOrder;
 	}
 
 	public Date getOrderDate() {
@@ -153,5 +179,37 @@ public class UserOrderBean implements Serializable {
 
 	public void setGetAllUserOrders(List<UserOrder> getAllUserOrders) {
 		this.getAllUserOrders = getAllUserOrders;
+	}
+
+	public int getSelectedUserId() {
+		return selectedUserId;
+	}
+
+	public void setSelectedUserId(int selectedUserId) {
+		this.selectedUserId = selectedUserId;
+	}
+
+	public int getSelectedShippingId() {
+		return selectedShippingId;
+	}
+
+	public void setSelectedShippingId(int selectedShippingId) {
+		this.selectedShippingId = selectedShippingId;
+	}
+
+	public int getSelectedPayementId() {
+		return selectedPayementId;
+	}
+
+	public void setSelectedPayementId(int selectedPayementId) {
+		this.selectedPayementId = selectedPayementId;
+	}
+
+	public int getSelectedAdressId() {
+		return selectedAdressId;
+	}
+
+	public void setSelectedAdressId(int selectedAdressId) {
+		this.selectedAdressId = selectedAdressId;
 	}
 }

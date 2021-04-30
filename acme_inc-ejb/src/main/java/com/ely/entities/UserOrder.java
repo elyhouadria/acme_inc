@@ -61,6 +61,15 @@ public class UserOrder implements Serializable {
 	
 
 	public UserOrder() {}
+	
+	public UserOrder(Date orderDate, Date shippingDate, OrderStatus orderStatus, Double totalPrice, User user, 	Adress adress) {
+		this.orderDate = orderDate;
+		this.shippingDate = shippingDate;
+		this.orderstatus = orderStatus;
+		this.totalPrice = totalPrice;
+		this.user = user;
+		this.adress =adress;
+	}
 
 	public UserOrder(Date orderDate, Date shippingDate, OrderStatus orderStatus, Double totalPrice, User user, 	Adress adress, Shipping shipping, Payement payement) {
 		this.orderDate = orderDate;
@@ -164,6 +173,32 @@ public class UserOrder implements Serializable {
 	public void setProductOrderList(List<OrderLine> productOrderList) {
 		this.productOrderList = productOrderList;
 	}
-		
-		
+
+	@Override
+	public String toString() {
+//		return id + ", " + orderDate + ", " + shippingDate + ", " + orderstatus + ", " + totalPrice;
+		return String.valueOf(id);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserOrder other = (UserOrder) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}			
 }
