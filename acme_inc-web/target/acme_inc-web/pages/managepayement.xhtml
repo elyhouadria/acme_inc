@@ -59,7 +59,7 @@ transitional.dtd">
 					</tr>
 					<tr>
 						<td><h:outputText value="Payement User Order"></h:outputText> <h:selectOneMenu
-								value="#{payementBean.userOrder}">
+								value="#{payementBean.selectedUserOrderId}">
 								<f:selectItem itemLabel="Select user Order" itemValue="" />
 								<f:selectItems value="#{userOrderBean.getAllUserOrders}"
 									var="userorder" itemValue="#{userorder.id}"

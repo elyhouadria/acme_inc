@@ -21,7 +21,8 @@ public class PayementBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int selectedPayement;
+	private int selectedPayementId;
+	private int selectedUserOrderId;
 	private Double amount;
 	private String currency;
 	private PayementStatus payementStatus;
@@ -40,7 +41,7 @@ public class PayementBean implements Serializable {
 	}
 	
 	public void modifyPayement(Payement payement) {
-		this.setSelectedPayement(payement.getId());
+		this.setSelectedPayementId(payement.getId());
 		this.setAmount(payement.getAmount());
 		this.setPayementStatus(payement.getPayementStatus());
 		this.setUserOrder(payement.getUserorder());
@@ -51,7 +52,7 @@ public class PayementBean implements Serializable {
 	}
 	
 	public void updatePayement() {
-		acmePayementServicesRemote.UpdatePayement(new Payement(selectedPayement, amount, payementStatus, payementType, currency, userOrder));
+		acmePayementServicesRemote.UpdatePayement(new Payement(selectedPayementId, amount, payementStatus, payementType, currency, userOrder));
 		
 	}
 	
@@ -59,12 +60,12 @@ public class PayementBean implements Serializable {
 		acmePayementServicesRemote.DeletePayement(payementId);		
 	}
 	
-	public int getSelectedPayement() {
-		return selectedPayement;
+	public int getSelectedPayementId() {
+		return selectedPayementId;
 	}
 
-	public void setSelectedPayement(int selectedPayement) {
-		this.selectedPayement = selectedPayement;
+	public void setSelectedPayementId(int selectedPayement) {
+		this.selectedPayementId = selectedPayement;
 	}
 
 	public Double getAmount() {
@@ -123,6 +124,13 @@ public class PayementBean implements Serializable {
 	public void setEmptyPayement(Payement emptyPayement) {
 		this.emptyPayement = emptyPayement;
 	}
-	
-	
+
+	public int getSelectedUserOrderId() {
+		return selectedUserOrderId;
+	}
+
+	public void setSelectedUserOrderId(int selectedUserOrderId) {
+		this.selectedUserOrderId = selectedUserOrderId;
+	}
+		
 }

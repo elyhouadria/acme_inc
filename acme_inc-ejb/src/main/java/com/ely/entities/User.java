@@ -170,8 +170,8 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-//		return firstName + " " + lastName;
-		return String.valueOf(id);
+		return id + firstName + " " + lastName;
+//		return String.valueOf(id);
 	}
 	@Override
 	public int hashCode() {

@@ -154,8 +154,8 @@ public class Adress implements Serializable {
 
 	@Override
 	public String toString() {
-//		return id + ", " + lastName + ", " + firstName + ", " + adressLine1 + ", " + adressLine2 + ", " + zipCode + ", " + city	+ ", " + country;
-		return String.valueOf(id);
+		return id + ", " + lastName + ", " + firstName + ", " + adressLine1 + ", " + adressLine2 + ", " + zipCode + ", " + city	+ ", " + country;
+//		return String.valueOf(id);
 	}
 	
 	@Override

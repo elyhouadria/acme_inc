@@ -36,7 +36,7 @@ public class UserOrder implements Serializable {
 	private Date shippingDate;
 	
 	@Enumerated(EnumType.STRING)
-	private OrderStatus orderstatus;
+	private OrderStatus orderStatus;
 	
 	private Double totalPrice;
 	
@@ -51,6 +51,8 @@ public class UserOrder implements Serializable {
 	@OneToMany(mappedBy="userorder")
 	private List<OrderLine> productOrderList;
 	
+	
+	//need to change this it's a many to one
 	@OneToOne
 	@JoinColumn(name="fk_shippingid")
 	private Shipping shipping;
@@ -62,10 +64,18 @@ public class UserOrder implements Serializable {
 
 	public UserOrder() {}
 	
+	public UserOrder(Date orderDate,Date shippingDate,OrderStatus orderStatus,Double totalPrice, Shipping shipping) {
+		this.orderDate = orderDate;
+		this.shippingDate = shippingDate;
+		this.orderStatus = orderStatus;
+		this.totalPrice = totalPrice;
+		this.shipping = shipping;
+	}
+	
 	public UserOrder(Date orderDate, Date shippingDate, OrderStatus orderStatus, Double totalPrice, User user, 	Adress adress) {
 		this.orderDate = orderDate;
 		this.shippingDate = shippingDate;
-		this.orderstatus = orderStatus;
+		this.orderStatus = orderStatus;
 		this.totalPrice = totalPrice;
 		this.user = user;
 		this.adress =adress;
@@ -74,7 +84,7 @@ public class UserOrder implements Serializable {
 	public UserOrder(Date orderDate, Date shippingDate, OrderStatus orderStatus, Double totalPrice, User user, 	Adress adress, Shipping shipping, Payement payement) {
 		this.orderDate = orderDate;
 		this.shippingDate = shippingDate;
-		this.orderstatus = orderStatus;
+		this.orderStatus = orderStatus;
 		this.totalPrice = totalPrice;
 		this.user = user;
 		this.adress =adress;
@@ -86,7 +96,7 @@ public class UserOrder implements Serializable {
 		this.id = id;
 		this.orderDate = orderDate;
 		this.shippingDate = shippingDate;
-		this.orderstatus = orderStatus;
+		this.orderStatus = orderStatus;
 		this.totalPrice = totalPrice;
 		this.user = user;
 		this.adress =adress;
@@ -118,12 +128,12 @@ public class UserOrder implements Serializable {
 		this.shippingDate = shippingDate;
 	}
 
-	public OrderStatus getOrderstatus() {
-		return orderstatus;
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
 	}
 
 	public void setStatus(OrderStatus orderstatus) {
-		this.orderstatus = orderstatus;
+		this.orderStatus = orderstatus;
 	}
 
 	public Double getTotalPrice() {
@@ -176,8 +186,8 @@ public class UserOrder implements Serializable {
 
 	@Override
 	public String toString() {
-//		return id + ", " + orderDate + ", " + shippingDate + ", " + orderstatus + ", " + totalPrice;
-		return String.valueOf(id);
+		return id + " order date: " + orderDate + ", " + orderStatus + ", " + totalPrice;
+//		return String.valueOf(id);
 	}
 	
 	@Override

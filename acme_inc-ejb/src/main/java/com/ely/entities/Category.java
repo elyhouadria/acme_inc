@@ -74,8 +74,8 @@ public class Category implements Serializable {
 
 	@Override
 	public String toString() {
-//		return id + " " + name + ": " + description;
-		return String.valueOf(id);
+		return id + " " + name + ": " + description;
+//		return String.valueOf(id);
 	}
 	
 	@Override

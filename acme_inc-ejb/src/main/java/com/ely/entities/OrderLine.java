@@ -122,8 +122,8 @@ public class OrderLine implements Serializable {
 
 	@Override
 	public String toString() {
-//		return id + ", " + quantity + ", " + orderLineDate + ", " + itemPrice + ", " + product;
-		return String.valueOf(id);
+		return id + "quantity, " + quantity + "orderLineDate :, " + orderLineDate + "orderLinePrice, " + orderLinePrice+ " product, " + product;
+//		return String.valueOf(id);
 	}
 	
 	@Override

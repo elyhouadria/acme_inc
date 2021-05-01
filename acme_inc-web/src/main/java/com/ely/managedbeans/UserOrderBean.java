@@ -44,41 +44,53 @@ public class UserOrderBean implements Serializable {
 	private List<OrderLine> productOrderList;
 
 	private List<UserOrder> getAllUserOrders;
-	
+
 	@PostConstruct
-	public void init() { 
-		getAllUserOrders = acmeUserOrderServicesRemote.getAllUserOrders();	
+	public void init() {
+		orderDate = new Date();
+		shippingDate = new Date();
+		totalPrice = 0.00;
+
+		getAllUserOrders = acmeUserOrderServicesRemote.getAllUserOrders();
 	}
 
 	@EJB
 	ACMEUserOrderServicesRemote acmeUserOrderServicesRemote;
 
 	public void modifyUserOrder(UserOrder userorder) {
+		this.setSelectedUserOrderId(userorder.getId());
 		this.setOrderDate(userorder.getOrderDate());
 		this.setShippingDate(userorder.getShippingDate());
-		this.setOrderStatus(userorder.getOrderstatus());
+		this.setOrderStatus(userorder.getOrderStatus());
 		this.setTotalPrice(userorder.getTotalPrice());
-		this.setSelectedUserId(userorder.getUser().getId());
-		this.setSelectedAdressId(userorder.getAdress().getId());
-		this.setSelectedShippingId(userorder.getShipping().getId());
-		;
-		this.setSelectedPayementId(userorder.getPayement().getId());
+
+		if (userorder.getUser() != null) {
+			this.setSelectedUserId(userorder.getUser().getId());
+		}
+		if (userorder.getAdress() != null) {
+			this.setSelectedAdressId(userorder.getAdress().getId());
+		}
+		if (userorder.getShipping() != null) {
+			this.setSelectedShippingId(userorder.getShipping().getId());
+		}
+		if (userorder.getPayement() != null) {
+			this.setSelectedPayementId(userorder.getPayement().getId());
+		}
 	}
 
 	public void addUserOrder() {
-		UserOrder userOrder = new UserOrder(orderDate, shippingDate, orderStatus, totalPrice, user, adress, shipping, payement);
+		UserOrder userOrder = new UserOrder(orderDate, shippingDate, orderStatus, totalPrice, user, adress);
 		User selectedUser = new User();
-		Shipping selectedShipping = new Shipping();
-		Payement selectedPayement = new Payement();
+//		Shipping selectedShipping = new Shipping();
 		Adress selectedAdress = new Adress();
 		selectedUser.setId(selectedUserId);
 		selectedAdress.setId(selectedAdressId);
-		selectedShipping.setId(selectedShippingId);
-		selectedPayement.setId(selectedPayementId);
+//		selectedShipping.setId(selectedShippingId);
+//		selectedPayement.setId(selectedPayementId);
 		userOrder.setUser(selectedUser);
 		userOrder.setAdress(selectedAdress);
-		userOrder.setShipping(selectedShipping);
-		userOrder.setPayement(selectedPayement);
+//		userOrder.setShipping(selectedShipping);
+//		userOrder.setPayement(selectedPayement);
 		acmeUserOrderServicesRemote.addUserOrder(userOrder);
 	}
 
@@ -88,7 +100,10 @@ public class UserOrderBean implements Serializable {
 
 	public void updateUserOrder() {
 		acmeUserOrderServicesRemote.updateUserOrder(new UserOrder(selectedUserOrderId, orderDate, shippingDate,
-				orderStatus, totalPrice, user, adress, shipping, payement));
+				orderStatus, totalPrice, acmeUserOrderServicesRemote.findUserById(selectedUserId),
+				acmeUserOrderServicesRemote.findAdressById(selectedAdressId),
+				acmeUserOrderServicesRemote.findShippingById(selectedShippingId),
+				acmeUserOrderServicesRemote.findPayementById(selectedPayementId)));
 	}
 
 	public int getSelectedUserOrderId() {

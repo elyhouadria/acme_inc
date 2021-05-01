@@ -22,7 +22,14 @@ transitional.dtd">
 						<f:facet name="header">
 							<h:outputText value="Product" />
 						</f:facet>
-						<h:outputText value="#{orderline.product}" />
+						<h:outputText
+							value="#{orderline.product} #{orderline.product.productName}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Order Line Total Price" />
+						</f:facet>
+						<h:outputText value="#{orderline.orderLinePrice}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -48,7 +55,7 @@ transitional.dtd">
 			<h:form method="post">
 				<table>
 					<tr>
-						<td><h:outputText value="Order Line Date" /></td>
+						<td><h:outputText value="Order Line Date dd-mm-yyyy" /></td>
 						<td><h:inputText value="#{orderLineBean.orderLineDate}">
 								<f:convertDateTime pattern="dd-MM-yyyy" />
 							</h:inputText></td>
@@ -65,7 +72,7 @@ transitional.dtd">
 					</tr>
 					<tr>
 						<td><h:outputText value="Order Line Product" /> <h:selectOneMenu
-								value="#{orderLineBean.selectedProductId}" >
+								value="#{orderLineBean.selectedProductId}">
 								<f:selectItem itemLabel="Select Product" itemValue="#{null}" />
 								<f:selectItems value="#{productBean.getAllProducts}"
 									var="product" itemValue="#{product.id}" itemLabel="#{product}" />

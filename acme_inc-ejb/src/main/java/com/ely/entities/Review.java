@@ -93,8 +93,8 @@ public class Review implements Serializable {
 
 	@Override
 	public String toString() {
-//		return id + ", " + reviewString + ", " + rating + ", " + product + ", " + user;
-		return String.valueOf(id);
+		return id + ", " + reviewString + ", " + rating + ", " + product + ", " + user;
+//		return String.valueOf(id);
 	}
 	
 	@Override

@@ -122,8 +122,8 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-//		return id + ", " + productName + ", " + productDescription + ", " + productPrice;
-		return String.valueOf(id);
+		return id + ", " + productName;
+//		return String.valueOf(id);
 	}
 	
 	@Override

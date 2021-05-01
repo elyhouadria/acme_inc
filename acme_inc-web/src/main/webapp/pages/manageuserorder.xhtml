@@ -74,11 +74,11 @@ transitional.dtd">
 					</tr>
 					<tr>
 						<td><h:outputText value="User Order totalPrice" /></td>
-						<td><h:inputText value="#{userOrderBean.totalPrice}" /></td>
+						<td><h:inputText converterId="javax.faces.Double" value="#{userOrderBean.totalPrice}" /></td>
 					</tr>
 					<tr>
 						<td><h:outputText value="User" /> <h:selectOneMenu
-								value="#{userOrderBean.user}" >
+								value="#{userOrderBean.selectedUserId}" >
 								<f:selectItem itemLabel="Select User" itemValue="#{null}" />
 								<f:selectItems value="#{userBean.getAllUsers}" var="user"
 									itemValue="#{user.id}" itemLabel="#{user}" />
@@ -86,7 +86,7 @@ transitional.dtd">
 					</tr>
 					<tr>
 						<td><h:outputText value="Adress" /> <h:selectOneMenu
-								value="#{userOrderBean.adress}" >
+								value="#{userOrderBean.selectedAdressId}" >
 								<f:selectItem itemLabel="Select adress" itemValue="#{null}" />
 								<f:selectItems value="#{adressBean.getAllAdresses}" var="adress"
 									itemValue="#{adress.id}" itemLabel="#{adress}" />
@@ -94,7 +94,7 @@ transitional.dtd">
 					</tr>
 					<tr>
 						<td><h:outputText value="Shipping" /> <h:selectOneMenu
-								value="#{userOrderBean.shipping}" >
+								value="#{userOrderBean.selectedShippingId}" >
 								<f:selectItem itemLabel="Select shipping" itemValue="#{null}" />
 								<f:selectItems value="#{shippingBean.allShippings}" var="#{shipping}"
 									itemValue="#{shipping.id}" itemLabel="#{shipping}" />
@@ -102,7 +102,7 @@ transitional.dtd">
 					</tr>
 					<tr>
 						<td><h:outputText value="Payement" /> <h:selectOneMenu
-								value="#{userOrderBean.payement}">
+								value="#{userOrderBean.selectedPayementId}">
 								<f:selectItem itemLabel="Select Payement" itemValue="#{null}" />
 								<f:selectItems value="#{payementBean.getAllPayements}"
 									var="payement" itemValue="#{payement.id}"
@@ -128,9 +128,5 @@ transitional.dtd">
 				</tr>
 			</h:form>
 		</h:panelGroup>
-
-
-
 	</ui:define>
-
 </ui:composition>

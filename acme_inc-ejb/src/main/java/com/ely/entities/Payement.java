@@ -110,8 +110,8 @@ public class Payement implements Serializable {
 
 	@Override
 	public String toString() {
-//		return id + ", " + amount + ", " + currency + ", " + payementStatus + ", " + payementType;
-		return String.valueOf(id);
+		return id + "amount: " + amount + "currency: " + currency + "payementStatus: " + payementStatus + "payementType : " + payementType;
+//		return String.valueOf(id);
 	}
 	
 	@Override

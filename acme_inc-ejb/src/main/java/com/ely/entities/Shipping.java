@@ -79,8 +79,8 @@ public class Shipping implements Serializable{
 
 	@Override
 	public String toString() {
-//		return id + ", " + shippingName + ", " + shippingPrice;
-		return String.valueOf(id);
+		return id + ", " + shippingName + ", " + shippingPrice;
+//		return String.valueOf(id);
 	}
 	@Override
 	public int hashCode() {
